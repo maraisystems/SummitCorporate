@@ -1,0 +1,193 @@
+############################################
+# OS GENERATED FILES
+############################################
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+############################################
+# IDE / EDITOR
+############################################
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+############################################
+# VISUAL STUDIO
+############################################
+.vs/
+TestResults/
+*.VisualState.xml
+
+############################################
+# .NET / .NET CORE
+############################################
+bin/
+obj/
+out/
+publish/
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+# Rider
+.idea/
+
+# NuGet
+packages/
+*.nupkg
+*.snupkg
+.nuget/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+############################################
+# ASP.NET CORE / CONFIG
+############################################
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.local.json
+
+# Secrets
+secrets.json
+*.secrets.json
+
+############################################
+# ENTITY FRAMEWORK
+############################################
+Migrations/*Designer.cs
+*.dbmdl
+*.edmx.diagram
+
+############################################
+# .NET MAUI / XAMARIN
+############################################
+*.apk
+*.ap_
+*.aab
+*.ipa
+*.msix
+*.appx
+*.appxbundle
+*.appxupload
+
+# Android
+*.keystore
+*.jks
+*.hprof
+
+# iOS
+*.dSYM/
+*.mobileprovision
+
+# MacCatalyst
+*.dmg
+
+**/AppPackages/
+**/BundleArtifacts/
+**/DeviceLogs/
+**/TestResults/
+
+############################################
+# NODE / REACT / NEXTJS
+############################################
+node_modules/
+.npm/
+.pnpm-store/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+build/
+dist/
+.next/
+out/
+coverage/
+
+# Cache
+.cache/
+.parcel-cache/
+.eslintcache
+
+############################################
+# NEXT.JS SPECIFIC
+############################################
+.next/
+out/
+.vercel/
+
+############################################
+# ENV FILES (IMPORTANT)
+############################################
+.env
+.env.*
+!.env.example
+
+############################################
+# TEST / COVERAGE
+############################################
+coverage/
+*.coverage
+*.coveragexml
+
+############################################
+# DOCKER
+############################################
+docker-compose.override.yml
+*.pid
+*.seed
+
+############################################
+# LOGS
+############################################
+logs/
+*.log
+
+############################################
+# TEMP FILES
+############################################
+tmp/
+temp/
+*.tmp
+
+############################################
+# DATABASE FILES
+############################################
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+############################################
+# CERTIFICATES / SECURITY
+############################################
+*.pfx
+*.p12
+*.cer
+*.crt
+*.key
+
+############################################
+# AZURE / CLOUD
+############################################
+.azure/
+*.PublishSettings
+
+############################################
+# MISC
+############################################
+*.bak
+*.swp
+*.orig
+Marai.UI/src/Marai.UI/nuget.config

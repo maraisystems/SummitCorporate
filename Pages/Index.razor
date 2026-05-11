@@ -1,0 +1,502 @@
+@page "/"
+
+<PageTitle>Summit Air | Premium Airline Booking</PageTitle>
+
+<div class="bg-white text-slate-950">
+    <MNav class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur">
+        <MNavBar class="mx-auto flex h-18 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
+            <a href="#home" class="flex items-center gap-3 no-underline" aria-label="Summit Air home">
+                <span class="grid h-10 w-10 place-items-center rounded-md bg-[#071A3D] text-sm font-black text-white">SA</span>
+                <span class="flex flex-col leading-tight">
+                    <span class="text-base font-black text-slate-950">Summit Air</span>
+                    <span class="text-xs font-bold uppercase tracking-[0.18em] text-[#0B5CAD]">Premium airline</span>
+                </span>
+            </a>
+
+            <nav class="ml-auto hidden items-center gap-7 text-sm font-semibold text-slate-700 lg:flex" aria-label="Main navigation">
+                @foreach (var link in NavLinks)
+                {
+                    <a href="@link.Href" class="no-underline transition hover:text-[#0B5CAD]">@link.Label</a>
+                }
+            </nav>
+
+            <a href="#booking" class="ml-auto hidden no-underline lg:block">
+                <MButton Class="h-10 rounded-md bg-[#0B5CAD] px-5 text-sm font-bold text-white shadow-sm transition hover:bg-[#084985]">
+                    Book now
+                </MButton>
+            </a>
+
+            <MNavToggle Target="MNavTarget.Menu"
+                        class="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-900 lg:hidden"
+                        aria-label="Open navigation">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+                    <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+            </MNavToggle>
+        </MNavBar>
+
+        <MNavMenu class="border-t border-slate-200 bg-white px-4 pb-4 pt-2 shadow-lg data-[state=closed]:hidden lg:hidden">
+            <nav class="mx-auto flex max-w-7xl flex-col gap-1 text-sm font-semibold" aria-label="Mobile navigation">
+                @foreach (var link in NavLinks)
+                {
+                    <a href="@link.Href" class="rounded-md px-3 py-3 text-slate-700 no-underline hover:bg-slate-100 hover:text-[#0B5CAD]">@link.Label</a>
+                }
+                <a href="#booking" class="rounded-md bg-[#0B5CAD] px-3 py-3 text-center font-bold text-white no-underline">Book now</a>
+            </nav>
+        </MNavMenu>
+    </MNav>
+
+    <section id="home" class="relative overflow-hidden bg-[#071A3D]">
+        <div class="min-h-104 bg-cover bg-center bg-[linear-gradient(120deg,rgba(7,26,61,0.95),rgba(7,26,61,0.68),rgba(11,92,173,0.2)),url('/images/summit-air-hero.jpg')]">
+            <div class="mx-auto grid min-h-[43rem] max-w-7xl items-center gap-10 px-4 pb-36 pt-16 sm:px-6 lg:grid-cols-[0.96fr_1.04fr] lg:px-8 lg:pb-44 lg:pt-20">
+                <div class="max-w-3xl">
+                    <MBadge Class="inline-flex rounded-md border border-white/20 bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-sky-100">
+                        Direct routes. Faster booking. Calm support.
+                    </MBadge>
+                    <h1 class="mt-5 text-5xl font-black leading-[1.02] text-white sm:text-6xl lg:text-7xl">
+                        Book calm, connected journeys.
+                    </h1>
+                    <p class="mt-5 max-w-2xl text-base leading-8 text-slate-100 sm:text-lg">
+                        Search premium fares, manage upcoming travel, and stay ahead of alerts with a booking flow designed for speed and confidence.
+                    </p>
+                    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                        <a href="#booking" class="no-underline">
+                            <MButton Class="h-12 w-full rounded-md bg-white px-6 text-sm font-black text-[#071A3D] shadow-xl shadow-slate-950/20 transition hover:bg-sky-50 sm:w-auto">
+                                Search flights
+                            </MButton>
+                        </a>
+                        <a href="#alerts" class="no-underline">
+                            <MButton Class="h-12 w-full rounded-md border border-white/30 bg-white/10 px-6 text-sm font-bold text-white transition hover:bg-white/15 sm:w-auto">
+                                View alerts
+                            </MButton>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden justify-end lg:flex">
+                    <div class="w-full max-w-md rounded-md border border-white/15 bg-white/10 p-5 text-white shadow-2xl shadow-slate-950/20 backdrop-blur">
+                        <p class="text-xs font-bold uppercase tracking-[0.18em] text-sky-100">Today at a glance</p>
+                        <div class="mt-5 grid gap-4">
+                            @foreach (var metric in HeroMetrics)
+                            {
+                                <div class="flex items-center justify-between border-b border-white/15 pb-4 last:border-b-0 last:pb-0">
+                                    <span class="text-sm text-white/78">@metric.Label</span>
+                                    <strong class="text-xl text-white">@metric.Value</strong>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="relative z-10 -mt-28 px-4 sm:px-6 lg:px-8">
+        <MCard Class="mx-auto max-w-7xl rounded-md border border-slate-200 bg-white shadow-2xl shadow-slate-950/12">
+            <MCardContent Class="p-4 sm:p-6 lg:p-7">
+                <div class="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+                    <div>
+                        <p class="text-xs font-black uppercase tracking-[0.18em] text-[#0B5CAD]">Flight booking</p>
+                        <h2 class="mt-1 text-2xl font-black text-slate-950">Plan your next Summit Air journey</h2>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs font-bold text-slate-600">
+                        <span class="rounded-full bg-slate-100 px-3 py-1">No change fees on Flex</span>
+                        <span class="rounded-full bg-sky-50 px-3 py-1 text-[#0B5CAD]">24/7 support</span>
+                    </div>
+                </div>
+
+                <MTabs DefaultValue="round-trip" Class="mt-6">
+                    <MTabsList Class="inline-grid w-full grid-cols-2 rounded-md bg-slate-100 p-1 sm:w-auto">
+                        <MTabsTrigger Value="round-trip" Class="@TripTabClass">
+                            Round-trip
+                        </MTabsTrigger>
+                        <MTabsTrigger Value="one-way" Class="@TripTabClass">
+                            One-way
+                        </MTabsTrigger>
+                    </MTabsList>
+
+                    <MTabsContent Value="round-trip" Class="mt-6">
+                        <div class="grid gap-4 lg:grid-cols-[1fr_1fr_1.35fr_1fr_auto]">
+                            <div>
+                                <MLabel For="round-from" Class="@FieldLabelClass">From</MLabel>
+                                <MInput id="round-from" @bind-Value="_fromAirport" Placeholder="SFO San Francisco" Class="@FieldInputClass" />
+                            </div>
+                            <div>
+                                <MLabel For="round-to" Class="@FieldLabelClass">To</MLabel>
+                                <MInput id="round-to" @bind-Value="_toAirport" Placeholder="HND Tokyo" Class="@FieldInputClass" />
+                            </div>
+                            <div>
+                                <MLabel For="round-dates" Class="@FieldLabelClass">Departure and return</MLabel>
+                                <MDatePicker id="round-dates"
+                                             IsDateRange="true"
+                                             DisplayMonths="2"
+                                             @bind-Value="_departureDate"
+                                             @bind-EndValue="_returnDate"
+                                             Placeholder="Select travel dates"
+                                             Class="relative mt-2"
+                                             TriggerClass="@DateTriggerClass"
+                                             BackdropClass="z-[55]"
+                                             PanelClass="@DatePanelClass"
+                                             MonthClass="w-56"
+                                             HeaderClass="mb-3 flex items-center justify-between gap-1"
+                                             NavButtonClass="@DateNavButtonClass"
+                                             MonthSelectClass="@DateSelectClass"
+                                             YearSelectClass="@DateSelectClass"
+                                             DayGridClass="gap-y-1 text-center"
+                                             DayOfWeekClass="flex h-8 items-center justify-center text-xs font-bold text-slate-400"
+                                             DayClass="@DateDayClass"
+                                             SelectedDayClass="!bg-[#0B5CAD] !text-white hover:!bg-[#084985]"
+                                             TodayDayClass="font-black text-[#0B5CAD]"
+                                             DisabledDayClass="cursor-not-allowed opacity-30 hover:bg-transparent"
+                                             RangeStartClass="!rounded-r-none"
+                                             RangeEndClass="!rounded-l-none"
+                                             InRangeClass="!rounded-none !bg-sky-100 !text-[#071A3D] hover:!bg-sky-200" />
+                            </div>
+                            <div>
+                                <MLabel Class="@FieldLabelClass">Cabin</MLabel>
+                                <select @bind="_selectedCabin" class="@FieldInputClass">
+                                    @foreach (var cabin in Cabins)
+                                    {
+                                        <option value="@cabin">@cabin</option>
+                                    }
+                                </select>
+                            </div>
+                            <a href="#destinations" class="self-end no-underline">
+                                <MButton Class="h-12 w-full rounded-md bg-[#0B5CAD] px-8 text-sm font-black text-white shadow-lg shadow-sky-900/15 transition hover:bg-[#084985] lg:w-auto">
+                                    Search flights
+                                </MButton>
+                            </a>
+                        </div>
+                    </MTabsContent>
+
+                    <MTabsContent Value="one-way" Class="mt-6">
+                        <div class="grid gap-4 lg:grid-cols-[1fr_1fr_1fr_1fr_auto]">
+                            <div>
+                                <MLabel For="one-from" Class="@FieldLabelClass">From</MLabel>
+                                <MInput id="one-from" @bind-Value="_fromAirport" Placeholder="SFO San Francisco" Class="@FieldInputClass" />
+                            </div>
+                            <div>
+                                <MLabel For="one-to" Class="@FieldLabelClass">To</MLabel>
+                                <MInput id="one-to" @bind-Value="_toAirport" Placeholder="HND Tokyo" Class="@FieldInputClass" />
+                            </div>
+                            <div>
+                                <MLabel For="one-date" Class="@FieldLabelClass">Departure</MLabel>
+                                <MDatePicker id="one-date"
+                                             @bind-Value="_departureDate"
+                                             Placeholder="Select departure"
+                                             Class="relative mt-2"
+                                             TriggerClass="@DateTriggerClass"
+                                             BackdropClass="z-[55]"
+                                             PanelClass="@DatePanelClass"
+                                             MonthClass="w-56"
+                                             HeaderClass="mb-3 flex items-center justify-between gap-1"
+                                             NavButtonClass="@DateNavButtonClass"
+                                             MonthSelectClass="@DateSelectClass"
+                                             YearSelectClass="@DateSelectClass"
+                                             DayGridClass="gap-y-1 text-center"
+                                             DayOfWeekClass="flex h-8 items-center justify-center text-xs font-bold text-slate-400"
+                                             DayClass="@DateDayClass"
+                                             SelectedDayClass="!bg-[#0B5CAD] !text-white hover:!bg-[#084985]"
+                                             TodayDayClass="font-black text-[#0B5CAD]"
+                                             DisabledDayClass="cursor-not-allowed opacity-30 hover:bg-transparent" />
+                            </div>
+                            <div>
+                                <MLabel Class="@FieldLabelClass">Cabin</MLabel>
+                                <select @bind="_selectedCabin" class="@FieldInputClass">
+                                    @foreach (var cabin in Cabins)
+                                    {
+                                        <option value="@cabin">@cabin</option>
+                                    }
+                                </select>
+                            </div>
+                            <a href="#destinations" class="self-end no-underline">
+                                <MButton Class="h-12 w-full rounded-md bg-[#0B5CAD] px-8 text-sm font-black text-white shadow-lg shadow-sky-900/15 transition hover:bg-[#084985] lg:w-auto">
+                                    Search flights
+                                </MButton>
+                            </a>
+                        </div>
+                    </MTabsContent>
+                </MTabs>
+
+                <MSeparator Class="my-6 bg-slate-200" />
+
+                <div class="grid gap-4 lg:grid-cols-[1fr_1fr_1fr_auto] lg:items-end">
+                    @PassengerCounter("Adults", _adults, _adults <= 1, IncrementAdults, DecrementAdults)
+                    @PassengerCounter("Children", _children, _children <= 0, IncrementChildren, DecrementChildren)
+                    @PassengerCounter("Infants", _infants, _infants <= 0, IncrementInfants, DecrementInfants)
+                    <div class="rounded-md border border-slate-200 bg-slate-50 px-4 py-3">
+                        <p class="text-xs font-black uppercase tracking-[0.16em] text-slate-500">Travelers</p>
+                        <p class="mt-1 text-lg font-black text-slate-950">@TotalPassengers passenger@((TotalPassengers == 1) ? string.Empty : "s")</p>
+                    </div>
+                </div>
+            </MCardContent>
+        </MCard>
+    </section>
+
+    <section id="destinations" class="bg-white px-4 py-18 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl">
+            <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                <div>
+                    <MBadge Class="inline-flex rounded-md bg-sky-50 px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-[#0B5CAD]">Top destinations</MBadge>
+                    <h2 class="mt-4 text-3xl font-black text-slate-950 sm:text-4xl">Popular routes with faster booking.</h2>
+                </div>
+                <p class="max-w-xl text-sm leading-7 text-slate-600">
+                    Clear fares, direct route details, and practical schedule signals keep the next decision close at hand.
+                </p>
+            </div>
+
+            <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+                @foreach (var destination in Destinations)
+                {
+                    <MCard Class="overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/10">
+                        <div class="aspect-16/10 relative overflow-hidden bg-slate-100">
+                            <img src="@destination.ImagePath" alt="@destination.ImageAlt" class="h-full w-full object-cover" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#071A3D]/78 via-[#071A3D]/20 to-transparent"></div>
+                            <div class="absolute inset-x-0 bottom-0 p-5 text-white">
+                                <p class="text-xs font-black uppercase tracking-[0.16em] text-sky-100">@destination.Code</p>
+                                <p class="mt-1 text-3xl font-black">@destination.City</p>
+                            </div>
+                        </div>
+                        <MCardContent Class="p-5">
+                            <div class="flex items-start justify-between gap-4">
+                                <div>
+                                    <MCardTitle Class="text-xl font-black text-slate-950">@destination.City</MCardTitle>
+                                    <MCardDescription Class="mt-1 text-sm text-slate-500">@destination.Route</MCardDescription>
+                                </div>
+                                <MBadge Class="rounded-md bg-sky-50 px-2.5 py-1 text-xs font-black text-[#0B5CAD]">@destination.Fare</MBadge>
+                            </div>
+                            <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">Flight</p>
+                                    <p class="mt-1 font-bold text-slate-900">@destination.Duration</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">Next fare</p>
+                                    <p class="mt-1 font-bold text-slate-900">@destination.NextFare</p>
+                                </div>
+                            </div>
+                            <a href="#booking" class="mt-5 inline-flex text-sm font-black text-[#0B5CAD] no-underline hover:text-[#084985]">Book this route</a>
+                        </MCardContent>
+                    </MCard>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section id="alerts" class="border-y border-slate-200 bg-slate-50 px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.75fr_1.25fr]">
+            <div>
+                <MBadge Class="inline-flex rounded-md bg-white px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-[#0B5CAD]">Current travel alerts</MBadge>
+                <h2 class="mt-4 text-3xl font-black text-slate-950 sm:text-4xl">Know what matters before you leave.</h2>
+                <p class="mt-4 text-sm leading-7 text-slate-600">
+                    Operational notices are designed for quick scanning, so travelers can act without digging.
+                </p>
+            </div>
+
+            <div class="grid gap-3">
+                @foreach (var alert in TravelAlerts)
+                {
+                    <MCard Class="rounded-md border border-slate-200 bg-white shadow-sm">
+                        <MCardContent Class="grid gap-4 p-5 sm:grid-cols-[auto_1fr_auto] sm:items-start">
+                            <MBadge Class="@alert.BadgeClass">@alert.Level</MBadge>
+                            <div>
+                                <MCardTitle Class="text-base font-black text-slate-950">@alert.Title</MCardTitle>
+                                <MCardDescription Class="mt-1 text-sm leading-6 text-slate-600">@alert.Description</MCardDescription>
+                            </div>
+                            <a href="#alerts" class="text-sm font-black text-[#0B5CAD] no-underline hover:text-[#084985]">Details</a>
+                        </MCardContent>
+                    </MCard>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section id="bookings" class="bg-white px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_1fr] lg:items-start">
+            <MCard Class="rounded-md border border-slate-200 bg-[#071A3D] text-white shadow-xl shadow-slate-950/10">
+                <MCardHeader Class="p-6 pb-3">
+                    <p class="text-xs font-black uppercase tracking-[0.18em] text-sky-200">My bookings</p>
+                    <MCardTitle Class="mt-2 text-3xl font-black text-white">Manage a trip in seconds.</MCardTitle>
+                    <MCardDescription Class="mt-2 text-sm leading-6 text-slate-200">Find your itinerary, check in, change seats, or review baggage options.</MCardDescription>
+                </MCardHeader>
+                <MCardContent Class="grid gap-4 p-6 pt-3 sm:grid-cols-2">
+                    <div>
+                        <MLabel For="booking-reference" Class="text-xs font-black uppercase tracking-[0.16em] text-sky-100">Booking reference</MLabel>
+                        <MInput id="booking-reference" @bind-Value="_bookingReference" Placeholder="ABC123" Class="mt-2 h-12 w-full rounded-md border border-white/20 bg-white px-3 text-sm font-bold text-slate-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-300" />
+                    </div>
+                    <div>
+                        <MLabel For="booking-last-name" Class="text-xs font-black uppercase tracking-[0.16em] text-sky-100">Last name</MLabel>
+                        <MInput id="booking-last-name" @bind-Value="_lastName" Placeholder="Rivera" Class="mt-2 h-12 w-full rounded-md border border-white/20 bg-white px-3 text-sm font-bold text-slate-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-300" />
+                    </div>
+                    <div class="sm:col-span-2">
+                        <MButton Class="h-12 w-full rounded-md bg-white px-6 text-sm font-black text-[#071A3D] transition hover:bg-sky-50">
+                            Manage booking
+                        </MButton>
+                    </div>
+                </MCardContent>
+            </MCard>
+
+            <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+                @foreach (var shortcut in BookingShortcuts)
+                {
+                    <a href="#bookings" class="rounded-md border border-slate-200 bg-white p-5 text-slate-950 no-underline shadow-sm transition hover:border-sky-200 hover:bg-sky-50">
+                        <p class="text-xs font-black uppercase tracking-[0.16em] text-[#0B5CAD]">@shortcut.Label</p>
+                        <h3 class="mt-2 text-xl font-black">@shortcut.Title</h3>
+                        <p class="mt-2 text-sm leading-6 text-slate-600">@shortcut.Description</p>
+                    </a>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-[#071A3D] px-4 py-12 text-white sm:px-6 lg:px-8">
+        <div class="mx-auto grid max-w-7xl gap-6 sm:grid-cols-3">
+            @foreach (var proof in TrustProof)
+            {
+                <div>
+                    <p class="text-3xl font-black">@proof.Value</p>
+                    <p class="mt-2 text-sm leading-6 text-slate-200">@proof.Label</p>
+                </div>
+            }
+        </div>
+    </section>
+
+    <footer class="bg-white px-4 py-8 sm:px-6 lg:px-8">
+        <div class="mx-auto flex max-w-7xl flex-col gap-4 border-t border-slate-200 pt-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+            <p class="font-semibold text-slate-700">Summit Air</p>
+            <p>Premium airline homepage theme for Marai.UI.</p>
+        </div>
+    </footer>
+</div>
+
+@code {
+    private string _fromAirport = "SFO San Francisco";
+    private string _toAirport = "HND Tokyo";
+    private string _selectedCabin = "Premium Economy";
+    private string? _bookingReference;
+    private string? _lastName;
+    private DateTime? _departureDate = new(2026, 6, 12);
+    private DateTime? _returnDate = new(2026, 6, 20);
+    private int _adults = 1;
+    private int _children;
+    private int _infants;
+
+    private int TotalPassengers => _adults + _children + _infants;
+
+    private static readonly string TripTabClass = "rounded-sm px-5 py-2.5 text-sm font-black text-slate-600 transition data-[state=active]:bg-white data-[state=active]:text-[#071A3D] data-[state=active]:shadow-sm";
+    private static readonly string FieldLabelClass = "text-xs font-black uppercase tracking-[0.16em] text-slate-500";
+    private static readonly string FieldInputClass = "mt-2 h-12 w-full rounded-md border border-slate-300 bg-white px-3 text-sm font-bold text-slate-950 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-200";
+    private static readonly string DateTriggerClass = "h-12 w-full rounded-md border border-slate-300 bg-white px-3 text-left text-sm font-bold text-slate-950 hover:border-[#0B5CAD] focus:outline-none focus:ring-2 focus:ring-sky-200";
+    private static readonly string DatePanelClass = "z-[60] mt-2 w-fit rounded-md border border-slate-200 bg-white p-4 shadow-2xl shadow-slate-950/20";
+    private static readonly string DateNavButtonClass = "flex h-8 w-8 items-center justify-center rounded-md text-lg leading-none text-slate-500 hover:bg-slate-100";
+    private static readonly string DateSelectClass = "bg-transparent text-sm font-black text-slate-800 focus:outline-none";
+    private static readonly string DateDayClass = "flex h-8 w-full items-center justify-center rounded-md text-sm text-slate-700 hover:bg-sky-50";
+
+    private static readonly IReadOnlyList<NavLink> NavLinks =
+    [
+        new("Destinations", "#destinations"),
+        new("Alerts", "#alerts"),
+        new("My Bookings", "#bookings"),
+        new("Help", "#bookings")
+    ];
+
+    private static readonly IReadOnlyList<string> Cabins =
+    [
+        "Economy",
+        "Premium Economy",
+        "Business",
+        "First"
+    ];
+
+    private static readonly IReadOnlyList<HeroMetric> HeroMetrics =
+    [
+        new("On-time departures", "91%"),
+        new("Support response", "2 min"),
+        new("Nonstop routes", "126")
+    ];
+
+    private static readonly IReadOnlyList<Destination> Destinations =
+    [
+        new("Tokyo", "HND", "San Francisco to Tokyo", "$849", "11h 10m", "Jun 12", "images/destination-tokyo.jpg", "Tokyo skyline seen from a high-rise viewpoint"),
+        new("Paris", "CDG", "New York to Paris", "$629", "7h 20m", "Jun 18", "images/destination-paris.jpg", "The Eiffel Tower in Paris"),
+        new("New York", "JFK", "London to New York", "$712", "8h 05m", "Jun 16", "images/destination-new-york.jpg", "New York City skyline from Ellis Island"),
+        new("Singapore", "SIN", "Los Angeles to Singapore", "$938", "17h 40m", "Jul 04", "images/destination-singapore.jpg", "Singapore skyline at night"),
+        new("Sydney", "SYD", "Vancouver to Sydney", "$905", "15h 25m", "Jun 28", "images/destination-sydney.jpg", "Sydney Opera House from Circular Quay"),
+        new("Dubai", "DXB", "Chicago to Dubai", "$882", "13h 35m", "Jul 09", "images/destination-dubai.jpg", "Dubai skyline viewed from above")
+    ];
+
+    private static readonly IReadOnlyList<TravelAlert> TravelAlerts =
+    [
+        new("Weather", "Northeast weather advisory", "Flights through JFK, BOS, and EWR may experience evening ground delays. Check status before leaving for the airport.", "rounded-md bg-amber-100 px-2.5 py-1 text-xs font-black text-amber-900"),
+        new("Reminder", "Arrive earlier for international departures", "Document checks are taking longer at select airports. We recommend arriving 3 hours before departure.", "rounded-md bg-sky-100 px-2.5 py-1 text-xs font-black text-[#0B5CAD]"),
+        new("Entry", "Passport validity requirements", "Several destinations require 6 months of passport validity beyond your return date. Review requirements before check-in.", "rounded-md bg-rose-100 px-2.5 py-1 text-xs font-black text-rose-800")
+    ];
+
+    private static readonly IReadOnlyList<BookingShortcut> BookingShortcuts =
+    [
+        new("Check-in", "Online check-in", "Open 24 hours before departure for eligible flights."),
+        new("Status", "Flight status", "Track departures, arrivals, and gate updates in real time."),
+        new("Baggage", "Baggage options", "Review allowances or add bags before you travel.")
+    ];
+
+    private static readonly IReadOnlyList<TrustMetric> TrustProof =
+    [
+        new("126", "nonstop routes across business and leisure destinations"),
+        new("24/7", "customer care for booking, travel, and disruption support"),
+        new("91%", "on-time departure performance across the network")
+    ];
+
+    private void IncrementAdults() => _adults++;
+    private void DecrementAdults()
+    {
+        if (_adults > 1)
+        {
+            _adults--;
+        }
+    }
+
+    private void IncrementChildren() => _children++;
+    private void DecrementChildren()
+    {
+        if (_children > 0)
+        {
+            _children--;
+        }
+    }
+
+    private void IncrementInfants() => _infants++;
+    private void DecrementInfants()
+    {
+        if (_infants > 0)
+        {
+            _infants--;
+        }
+    }
+
+    private sealed record NavLink(string Label, string Href);
+    private sealed record HeroMetric(string Label, string Value);
+    private sealed record Destination(string City, string Code, string Route, string Fare, string Duration, string NextFare, string ImagePath, string ImageAlt);
+    private sealed record TravelAlert(string Level, string Title, string Description, string BadgeClass);
+    private sealed record BookingShortcut(string Label, string Title, string Description);
+    private sealed record TrustMetric(string Value, string Label);
+}
+
+@code {
+    private RenderFragment PassengerCounter(string Label, int Value, bool DecrementDisabled, Action OnIncrement, Action OnDecrement) => @<div class="rounded-md border border-slate-200 bg-white p-4">
+        <p class="text-xs font-black uppercase tracking-[0.16em] text-slate-500">@Label</p>
+        <div class="mt-3 flex items-center justify-between gap-3">
+            <MButton OnClick="@(_ => OnDecrement())" Disabled="@DecrementDisabled" Class="@CounterButtonClass(DecrementDisabled)" aria-label="@($"Decrease {Label}")">
+                -
+            </MButton>
+            <span class="min-w-10 text-center text-2xl font-black text-slate-950">@Value</span>
+            <MButton OnClick="@(_ => OnIncrement())" Class="@CounterButtonClass(false)" aria-label="@($"Increase {Label}")">
+                +
+            </MButton>
+        </div>
+    </div>;
+
+    private static string CounterButtonClass(bool disabled)
+        => disabled
+            ? "grid h-10 w-10 place-items-center rounded-md border border-slate-200 bg-slate-100 text-lg font-black text-slate-300"
+            : "grid h-10 w-10 place-items-center rounded-md border border-slate-300 bg-white text-lg font-black text-[#0B5CAD] transition hover:border-[#0B5CAD] hover:bg-sky-50";
+}
