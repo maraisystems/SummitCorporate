@@ -47,7 +47,7 @@
     </MNav>
 
     <section id="home" class="relative overflow-hidden bg-[#071A3D]">
-        <div class="min-h-104 bg-cover bg-center bg-[linear-gradient(120deg,rgba(7,26,61,0.95),rgba(7,26,61,0.68),rgba(11,92,173,0.2)),url('/images/summit-air-hero.jpg')]">
+        <div class="hero-bg min-h-104">
             <div class="mx-auto grid min-h-[43rem] max-w-7xl items-center gap-10 px-4 pb-36 pt-16 sm:px-6 lg:grid-cols-[0.96fr_1.04fr] lg:px-8 lg:pb-44 lg:pt-20">
                 <div class="max-w-3xl">
                     <MBadge Class="inline-flex rounded-md border border-white/20 bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-sky-100">
@@ -248,22 +248,25 @@
             <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                 @foreach (var destination in Destinations)
                 {
-                    <MCard Class="overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/10">
-                        <div class="aspect-16/10 relative overflow-hidden bg-slate-100">
-                            <img src="@destination.ImagePath" alt="@destination.ImageAlt" class="h-full w-full object-cover" />
+                    <MCard Class="flex h-full flex-col overflow-hidden rounded-md border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-900/10">
+                        
+                        <div class="relative h-72 w-full shrink-0 overflow-hidden bg-slate-100">
+                            <img src="@destination.ImagePath" alt="@destination.ImageAlt" class="h-full w-full object-cover object-center" />
+                            <!-- 
                             <div class="absolute inset-0 bg-gradient-to-t from-[#071A3D]/78 via-[#071A3D]/20 to-transparent"></div>
                             <div class="absolute inset-x-0 bottom-0 p-5 text-white">
                                 <p class="text-xs font-black uppercase tracking-[0.16em] text-sky-100">@destination.Code</p>
                                 <p class="mt-1 text-3xl font-black">@destination.City</p>
                             </div>
+                            -->
                         </div>
-                        <MCardContent Class="p-5">
+                        <MCardContent Class="flex flex-1 flex-col p-5">
                             <div class="flex items-start justify-between gap-4">
                                 <div>
                                     <MCardTitle Class="text-xl font-black text-slate-950">@destination.City</MCardTitle>
                                     <MCardDescription Class="mt-1 text-sm text-slate-500">@destination.Route</MCardDescription>
                                 </div>
-                                <MBadge Class="rounded-md bg-sky-50 px-2.5 py-1 text-xs font-black text-[#0B5CAD]">@destination.Fare</MBadge>
+                                <MBadge Class="shrink-0 rounded-md bg-sky-50 px-2.5 py-1 text-xs font-black text-[#0B5CAD]">@destination.Fare</MBadge>
                             </div>
                             <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
                                 <div>
@@ -275,7 +278,7 @@
                                     <p class="mt-1 font-bold text-slate-900">@destination.NextFare</p>
                                 </div>
                             </div>
-                            <a href="#booking" class="mt-5 inline-flex text-sm font-black text-[#0B5CAD] no-underline hover:text-[#084985]">Book this route</a>
+                            <a href="#booking" class="mt-auto pt-5 inline-flex text-sm font-black text-[#0B5CAD] no-underline hover:text-[#084985]">Book this route</a>
                         </MCardContent>
                     </MCard>
                 }

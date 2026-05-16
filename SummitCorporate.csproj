@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Marai.UI\Marai.UI.csproj" />
+    <PackageReference Include="Marai.UI" Version="1.0.0-Alpha.1" />
   </ItemGroup>
 
   <PropertyGroup>
