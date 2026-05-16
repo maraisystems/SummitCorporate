@@ -8,6 +8,8 @@ builder.Services.AddMaraiUI();
 
 var app = builder.Build();
 
+app.UsePathBase("/themes/summit-corporate");
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseHsts();
