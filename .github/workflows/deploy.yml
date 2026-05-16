@@ -46,4 +46,6 @@ jobs:
 
             docker compose up -d --force-recreate summit-corporate
 
+            docker compose restart nginx
+
             docker image prune -f
