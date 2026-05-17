@@ -34,7 +34,7 @@ body {
 }
 
 .hero-bg {
-  background-image: linear-gradient(120deg, rgba(7, 26, 61, 0.95), rgba(7, 26, 61, 0.68), rgba(11, 92, 173, 0.2)), url('/images/summit-air-hero.jpg');
+  background-image: linear-gradient(120deg, rgba(7, 26, 61, 0.95), rgba(7, 26, 61, 0.68), rgba(11, 92, 173, 0.2)), url('../images/summit-air-hero.jpg');
   background-size: cover;
   background-position: center;
 }
